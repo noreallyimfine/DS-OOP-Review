@@ -1,5 +1,5 @@
 import unittest
-from players import Player, Quarterback
+from players import OPlayer, Quarterback
 from possible_values import *
 from game import Game
 # TODO - some things you can add...
@@ -13,10 +13,16 @@ from game import Game
 class FootballGameTest(unittest.TestCase):
     '''test the class'''
     def test_field_goal_made(self):
-        pass  # TODO
+        game = Game(teams=['h', 'j'])
+        score1 = game.score['h']
+        game.field_goal('h')
+        self.assertEqual(game.score['h'], (score1+3))
 
-    def test_get_winnerr(self):
-        pass  # TODO
+    def test_get_winner(self):
+        game = Game(teams=['h', 'j'])
+        winner = game.teams[0]
+        game.get_winning_team()
+        self.assertEqual(winner, game.winning_team_)
 
 
 class FootballPlayerTest(unittest.TestCase):
@@ -25,16 +31,16 @@ class FootballPlayerTest(unittest.TestCase):
                  interceptions=0
     '''
     def test_default_player_yards(self):
-        player = Player(name='Dude')
+        player = OPlayer(name='Dude')
         self.assertEqual(player.yards, 120)
 
     def test_player_yards_set_to(self):
-        player = Player(name='OtherDude', yards=150)
+        player = OPlayer(name='OtherDude', yards=150)
         self.assertEqual(player.yards, 150)
 
     def test_default_qb_interceptions(self):
         qb = Quarterback(name='FancyDude')
-        self.assertEqual(qb.interceptions, 4)
+        self.assertEqual(qb.interceptions, 2)
 
     def test_default_qb_completed_passes(self):
         qb = Quarterback()
@@ -42,7 +48,7 @@ class FootballPlayerTest(unittest.TestCase):
 
     def test_passing_score(self):
         qb = Quarterback()
-        self.assertEqual((20 - (2 * 4)), qb.passing_score())
+        self.assertEqual((20 - (2 * 3) + 168), qb.passing_score())
 
 
 if __name__ == '__main__':
