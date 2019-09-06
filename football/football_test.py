@@ -1,4 +1,5 @@
 import unittest
+import season
 from players import OPlayer, Quarterback
 from possible_values import *
 from game import Game
@@ -27,8 +28,7 @@ class FootballGameTest(unittest.TestCase):
 
 class FootballPlayerTest(unittest.TestCase):
     '''Check the default values for Player and Quarterback
-    yards=120, touchdowns=5, safety=1,
-                 interceptions=0
+    yards=120, touchdowns=5, interceptions=2
     '''
     def test_default_player_yards(self):
         player = OPlayer(name='Dude')
@@ -49,6 +49,14 @@ class FootballPlayerTest(unittest.TestCase):
     def test_passing_score(self):
         qb = Quarterback()
         self.assertEqual((20 - (2 * 3) + 168), qb.passing_score())
+
+
+class FootballTeamTest(unittest.TestCase):
+    '''Check that the two teams matched up in a game are not the same team'''
+    def test_matchup(self):
+        games = season.generate_rand_games()
+        for game in games:
+            self.assertNotEqual(game.teams[0], game.teams[1])
 
 
 if __name__ == '__main__':

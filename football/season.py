@@ -2,7 +2,7 @@
 '''
 from possible_values import *
 from game import Game
-from random import randint, uniform, sample, choice
+from random import randint, uniform, sample
 
 
 def generate_rand_games(n=15):
@@ -16,8 +16,9 @@ def generate_rand_games(n=15):
     # TODO - You can also include the location and week number if desired
     for i in list(range(n)):
         # Get team names by sampling team_names from possible_values
-        game = Game(teams=sample(team_names, k=2),
-                    location=choice(locations),
+        teams = sample(team_names, k=2)
+        game = Game(teams=teams,
+                    location=locations[teams[1]],
                     week=weeks[i])
 
         # Give each team a random number (from 0 to 3) of each:

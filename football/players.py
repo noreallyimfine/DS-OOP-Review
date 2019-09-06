@@ -11,12 +11,9 @@ class OPlayer:
     '''
     def __init__(self, name=None, yards=120, touchdowns=5, catches=4):
         self.name = name
-        self.yards = yards
-        self.catches = catches
-        self.touchdowns = touchdowns
-        self.stats = {'td': self.touchdowns,
-                      'yards': self.yards,
-                      'catches': self.catches}
+        self.stats = {'td': touchdowns,
+                      'yards': yards,
+                      'catches': catches}
 
     def get_points(self):
         '''Gets points scored by the player from stats
